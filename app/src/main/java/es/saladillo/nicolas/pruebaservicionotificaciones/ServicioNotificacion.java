@@ -27,13 +27,16 @@ public class ServicioNotificacion extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        Notification notification = new NotificationCompat.Builder(this, "Lamlataf")
-                .setSmallIcon(R.drawable.ic_whatshot_black_24dp)
-                .setContentTitle("Prueba de notificacion")
-                .setContentText("Notificacion lanzada por un servicio")
-                .build();
+        NotificationCompat.Builder notif = new NotificationCompat.Builder(this, Constants.DEFAULT_CHANNEL_ID);
+        notif.setSmallIcon(R.drawable.ic_whatshot_black_24dp)
+                .setContentTitle("HijuePuta MalPario")
+                .setContentText("CaguenTo")
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
+                .setAutoCancel(true);
+
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        // NOTIFICATION_ID debe ser un entero único para cada notificación.
-        notificationManager.notify(NOTIFICATION_ID, notification);
+        notificationManager.notify(NOTIFICATION_ID, notif.build());
+
+
     }
 }

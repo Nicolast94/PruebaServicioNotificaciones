@@ -8,25 +8,21 @@ import android.os.Build;
 import android.provider.SyncStateContract;
 
 public class App extends Application {
-
     @Override
     public void onCreate() {
-        crearCanal();
         super.onCreate();
+        createChannel();
     }
 
-    private void crearCanal() {
+    private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Se crea el canal.
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    "Lamlataf",
-                    getString(R.string.app_name),
+            NotificationManager notificationManager = (NotificationManager) getSystemService(
+                    Context.NOTIFICATION_SERVICE);
+            NotificationChannel defaultChannel = new NotificationChannel(
+                    Constants.DEFAULT_CHANNEL_ID,
+                    getString(R.string.default_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("PruebaNotificacion");
-            // Se registra el canal en el gestor de notificaciones
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
+            defaultChannel.setDescription(getString(R.string.default_channel_name));
         }
     }
 }
